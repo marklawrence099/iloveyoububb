@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Love</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff5f5;
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 245, 245, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ff6b6b;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ff6b6b;
+        }
+
+        .header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 56, 56, 0.3)), url('pictures/IMG_20240813_182649_291.jpg') center/cover;
+            color: white;
+            margin-top: 60px;
+        }
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .header p {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            opacity: 0;
+            animation: fadeIn 2s forwards 1s; /* Delay the animation to appear after the h1 */
+            margin-top: 1rem;
+            color: #fff;
+        }
+
+        .content-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .content-section:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .image-container {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .text-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .text-content h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+        }
+
+        .text-content p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .footer {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .heart {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 2rem;
+            cursor: pointer;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .content-section {
+                flex-direction: column !important;
+                padding: 3rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 3rem;
+            }
+
+            .text-content h2 {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="nav-logo">Our Love Story</a>
+            <div class="nav-links">
+                <a href="#story">Our Story</a>
+                <a href="#memories">Memories</a>
+                <a href="#future">Future</a>
+                
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="header-content">
+            <h1>My Dearest Mikay,</h1>
+            <p>Happy Valentine's Day! <br>I love you so much!</p>
+        </div>
+    </header>
+
+    <section class="content-section" id="story" data-aos="fade-up">
+        <div class="image-container">
+            <img src="/pictures/b4310fe6-02e2-4fe8-a016-1c5d8fb6a735.jfif" alt="First Memory">
+        </div>
+        <div class="text-content">
+            <h2>Our First Interaction</h2>
+            <p>I still remember our first interaction—you wished me good luck on my exam on Filipino. Simple, yet it stuck with me. Funny how a single message turned into something so much more. 
+
+            </p>
+        </div>
+    </section>
+
+    <section class="content-section" id="memories" data-aos="fade-up">
+        <div class="image-container">
+            <img src="/pictures/00d853d0-130d-4a5f-8e22-eaf38e357a35.jfif" alt="Special Moment">
+        </div>
+        <div class="text-content">
+            <h2>Beautiful Memories</h2>
+            <p>Each moment with you becomes a treasured memory. Your smile lights up my darkest days, and your love gives me strength I never knew I had. Thank you for being my partner, my best friend, and my soulmate.</p>
+        </div>
+    </section>
+
+    <section class="content-section" id="future" data-aos="fade-up">
+        <div class="image-container">
+            <img src="/pictures/892c7dc2-4632-456c-bace-1f70f037e44a.jfif" alt="Future Together">
+        </div>
+        <div class="text-content">
+            <h2>Our Future Together</h2>
+            <p>I dream of all the adventures we'll share, the memories we'll create, and the love that will continue to grow between us. With you, every day feels like Valentine's Day, and I can't wait to spend forever by your side.</p>
+        </div>
+    </section>
+
+    <div class="heart" id="heart">❤️</div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>A message for my love</h3>
+                <p>Remember that I'll always be by your side, forever. I love you so much bubb. </p>
+            </div>
+            
+            
+        </div>
+        
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Enhanced smooth scroll with more control
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Get the target section
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                // Get the offset position of the target
+                const offsetTop = targetSection.offsetTop;
+                const navHeight = document.querySelector('.navbar').offsetHeight;
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+
+                // Smooth scroll with custom timing
+                window.scrollTo({
+                    top: offsetTop - navHeight,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Improved scroll spy with debouncing
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            
+            scrollTimeout = setTimeout(() => {
+                const scrollPosition = window.scrollY + window.innerHeight / 3;
+                
+                document.querySelectorAll('section').forEach(section => {
+                    const top = section.offsetTop;
+                    const height = section.offsetHeight;
+                    
+                    if (scrollPosition >= top && scrollPosition <= top + height) {
+                        const currentId = section.getAttribute('id');
+                        document.querySelectorAll('.nav-links a').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${currentId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, 50);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Heart click animation
+        const heart = document.getElementById('heart');
+        heart.addEventListener('click', () => {
+            const newHeart = document.createElement('div');
+            newHeart.innerHTML = '❤️';
+            newHeart.style.position = 'fixed';
+            newHeart.style.left = Math.random() * window.innerWidth + 'px';
+            newHeart.style.top = window.innerHeight + 'px';
+            newHeart.style.animation = 'float 3s forwards';
+            document.body.appendChild(newHeart);
+
+            setTimeout(() => {
+                newHeart.remove();
+            }, 3000);
+        });
+
+        // Add floating hearts animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0% { transform: translateY(0); opacity: 1; }
+                100% { transform: translateY(-100vh); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
